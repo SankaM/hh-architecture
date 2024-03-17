@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "fe19902f-37c9-4ef3-9645-49d59bc5eb5e",
+		"name": "HustleShip",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15715193"
+	},
+	"item": [
+		{
+			"name": "createSailor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();",
+							"",
+							"var keyValue = responseData.id;",
+							"",
+							"pm.environment.set(\"sailorId\", keyValue);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"test2\",\n    \"tag\": \"TST\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/sailor/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sailor",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "approveSailorByAdmin",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"test2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/admin/sailor/{{sailorId}}/approve",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"admin",
+						"sailor",
+						"{{sailorId}}",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSailor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"test2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/sailor/{{sailorId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sailor",
+						"{{sailorId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createHustle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();",
+							"",
+							"var keyValue = responseData.id;",
+							"",
+							"pm.environment.set(\"hustleId\", keyValue);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"my-first-hustle-proposal\",\n    \"description\": \"Introduce competitive menu to restaurant\",\n    \"valuation\": 10000,\n    \"currency\": \"SGD\",\n    \"cardCount\": 1000,\n    \"cardValue\": 10,\n    \"tenure\": 1,\n    \"tenureUnit\": \"YEAR\",\n    \"returnPeriod\": \"MONTHLY\",\n    \"returnType\": \"FIXED_AMOUNT_PER_CARD\",\n    \"returnValue\": 1.5,\n    \"totalReturnPerCard\": 8\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/sailor/{{sailorId}}/create/hustle",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sailor",
+						"{{sailorId}}",
+						"create",
+						"hustle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "approveHustleByAdmin",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/admin/sailor/{{sailorId}}/hustle/{{hustleId}}/approve",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"admin",
+						"sailor",
+						"{{sailorId}}",
+						"hustle",
+						"{{hustleId}}",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adminJobToActivateApprovedHustles",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"test2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/admin/job/hustles/activate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"admin",
+						"job",
+						"hustles",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createVoyager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();",
+							"",
+							"var keyValue = responseData.id;",
+							"var walletId = responseData.wallets[0].walletId;",
+							"pm.environment.set(\"voyagerId\", keyValue);",
+							"pm.environment.set(\"walletId\", walletId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"voyager1\",\n    \"name\": \"Adam Smith\",\n    \"initialBalance\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/voyager/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"voyager",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getVoyager",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"test2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/voyager/{{voyagerId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"voyager",
+						"{{voyagerId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getActiveHustles",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"test2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/hustles/active",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hustles",
+						"active"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getHustleById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/hustles/{{hustleId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hustles",
+						"{{hustleId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createAmuletBySelectedHustle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"investedAmount\": 100,\n    \"purchasedCardCount\":10,\n    \"walletId\":\"{{walletId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/voyager/{{voyagerId}}/hustle/{{hustleId}}/amulet",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"voyager",
+						"{{voyagerId}}",
+						"hustle",
+						"{{hustleId}}",
+						"amulet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getVoyagerAfterCreateAmulet",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"test2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/voyager/{{voyagerId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"voyager",
+						"{{voyagerId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sailorReturnPayment-TODO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"investedAmount\": 100,\n    \"purchasedCardCount\":10,\n    \"walletId\":\"{{walletId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/voyager/{{voyagerId}}/hustle/{{hustleId}}/amulet",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"voyager",
+						"{{voyagerId}}",
+						"hustle",
+						"{{hustleId}}",
+						"amulet"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
